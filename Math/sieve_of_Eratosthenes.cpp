@@ -7,6 +7,7 @@
  */
 
 #include <iostream>
+
 using namespace std;
 
 #define MAX 10000000
@@ -17,35 +18,32 @@ int isprime[MAX];
  * This is the function that finds the primes and eliminates 
  * the multiples.
  */
-void sieve(int N)
+void sieve(int n)
 {
-    isprime[0] = 0;
-    isprime[1] = 0;
-    for (int i = 2; i <= N; i++)
-    {
-        if (isprime[i])
-        {
-            for (int j = i * 2; j <= N; j += i)
-            {
-                isprime[j] = 0;
-            }
-        }
-    }
+        int i;
+        int j;
+
+        isprime[0] = 0;
+        isprime[1] = 0;
+
+        for (i = 2; i <= n; i++)
+                if (isprime[i])
+                        for (j = i * 2; j <= n; j += i)
+                                isprime[j] = 0;
 }
 
 /*
  * This function prints out the primes to STDOUT
  */
-void print(int N)
+void print(int n)
 {
-    for (int i = 1; i <= N; i++)
-    {
-        if (isprime[i] == 1)
-        {
-            cout << i << ' ';
-        }
-    }
-    cout << '\n';
+        int i;
+
+        for (i = 1; i <= n; i++)
+                if (isprime[i] == 1)
+                        cout << i << ' ';
+
+        cout << '\n';
 }
 
 /*
@@ -54,16 +52,17 @@ void print(int N)
  */
 void init()
 {
-    for (int i = 1; i < MAX; i++)
-    {
-        isprime[i] = 1;
-    }
+        int i;
+
+        for (i = 1; i < MAX; i++)
+                isprime[i] = 1;
 }
 
-int main()
+int main(void)
 {
-    int N = 100;
-    init();
-    sieve(N);
-    print(N);
+        init();
+        sieve(100);
+        print(100);
+
+        return 1;
 }
